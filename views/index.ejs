@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inicio</title>
+</head>
+<body>
+    <table border="1px">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Título</td>
+            <td>Descrição</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% tarefas.forEach(tarefa=>{ %>
+        <tr>
+            <td><%=tarefa.id%></td>
+            <td><%=tarefa.titulo%></td>
+            <td><%=tarefa.descricao%></td>
+        </tr>
+        <%})%>
+    </tbody>
+    </table>
+
+</body>
+</html>

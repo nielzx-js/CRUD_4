@@ -12,6 +12,8 @@
             <td>ID</td>
             <td>Título</td>
             <td>Descrição</td>
+            <td>Editar</td>
+            <td>Excluir</td>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +22,14 @@
             <td><%=tarefa.id%></td>
             <td><%=tarefa.titulo%></td>
             <td><%=tarefa.descricao%></td>
+            <td><button>Editar</button></td>
+
+            <td>
+                <form action="/delete/<%=tarefa.id%>" method="post">
+                    <button type="submit">Excluir</button>
+                </form>
+                
+            </td>
         </tr>
         <%})%>
     </tbody>

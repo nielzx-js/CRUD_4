@@ -20,6 +20,35 @@ app.get('/', async (req,res)=>{
 
 
 
+
+//CRUD
+//excluir
+app.post('/delete/:id',async (req,res)=>{
+    const id=req.params.id
+    const query=`
+    DELETE FROM tarefas WHERE id = $1
+    `
+    const result=await pool.query(query,[id])
+    if(result.rowCount>0){
+        res.send(`
+            <script>
+                alert("tarefa deletada com sucesso")
+                window.location.href='/'
+            </script>   
+            `)
+    }
+    else{
+        res.send(`
+            <script>
+                alert("não foi possível deletar a tarefa")
+                window.location.href='/'
+            </script>   
+            `)    
+    }
+})
+
+
+
 app.listen(PORT,()=>{
     console.log(`rodando em http://localhost:${PORT}`)
 })

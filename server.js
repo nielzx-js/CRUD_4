@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const verificarToken=require('./auth')
 require('dotenv').config()
 const app = express()
 const PORT = process.env.PORT
@@ -10,6 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+
 app.get('/', async (req,res)=>{
     const query= `
     SELECT * FROM tarefas
@@ -17,7 +19,7 @@ app.get('/', async (req,res)=>{
     const result = await pool.query(query)
     res.render('index',{tarefas:result.rows})
 })
-app.get('/edit/:id',async(req,res)=>{
+app.get('/edit/:id',verificarToken,async(req,res)=>{
     const id=req.params.id
     const query=`
     SELECT * FROM tarefas WHERE id=$1
@@ -30,7 +32,7 @@ app.get('/edit/:id',async(req,res)=>{
 
 //CRUD
 //excluir
-app.post('/delete/:id',async (req,res)=>{
+app.post('/delete/:id',verificarToken,async (req,res)=>{
     const id=req.params.id
     const query=`
     DELETE FROM tarefas WHERE id = $1
@@ -55,7 +57,7 @@ app.post('/delete/:id',async (req,res)=>{
 })
 
 //adicionar
-app.post('/add', async(req,res)=>{
+app.post('/add',verificarToken, async(req,res)=>{
     const {titulo,descricao} = req.body
     const query=
     `

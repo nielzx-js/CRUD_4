@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>inicio</title>
+    <style>
+        .form2{
+            margin-top: 100px;
+        }
+    </style>
 </head>
 <body>
     <table border="1px">
@@ -32,8 +37,15 @@
             </td>
         </tr>
         <%})%>
+      
     </tbody>
     </table>
-
+  <form class="form2" method="post" action="/add">
+            <label for="titulo">Insira um título: </label><br>
+            <input type="text" maxlength="100" name="titulo" required><br>
+            <label for="descricao">Insira uma Descrição</label><br>
+            <textarea name="descricao"></textarea><br>
+            <button type="submit">Enviar</button>
+        </form>
 </body>
 </html>

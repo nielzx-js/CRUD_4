@@ -47,7 +47,24 @@ app.post('/delete/:id',async (req,res)=>{
     }
 })
 
-
+//adicionar
+app.post('/add', async(req,res)=>{
+    const {titulo,descricao} = req.body
+    const query=
+    `
+    INSERT INTO tarefas(titulo,descricao)
+    values($1,$2)
+    `
+    const result=await pool.query(query,[titulo,descricao])
+    if(result.rowCount>0){
+        res.send(`
+            <script>
+            alert("tarefa adicionada")
+            window.location.href='/'
+            </script>
+            `)
+    }
+})
 
 app.listen(PORT,()=>{
     console.log(`rodando em http://localhost:${PORT}`)

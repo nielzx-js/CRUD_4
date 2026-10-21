@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edição</title>
+</head>
+<body>
+<% tarefa.forEach(tarefa=>{ %>
+    <form method="POST" action="/edit/<%=tarefa.id%>"> 
+       
+            <label for="id">ID:</label><br>
+            <input type="text" value="<%=tarefa.id%>" readonly  ><br>
+            <label for="titulo">titulo:</label><br>
+            <input type="titulo" name="titulo" value="<%=tarefa.titulo%>"><br>
+            <label for="descricao">Descricao</label><br>
+            <textarea name="descricao"><%=tarefa.descricao%></textarea><br>
+            <button type="submit">Salvar</button>
+        
+
+
+    
+    </form>
+<%})%>
+</body>
+</html>

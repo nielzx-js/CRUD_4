@@ -17,7 +17,14 @@ app.get('/', async (req,res)=>{
     const result = await pool.query(query)
     res.render('index',{tarefas:result.rows})
 })
-
+app.get('/edit/:id',async(req,res)=>{
+    const id=req.params.id
+    const query=`
+    SELECT * FROM tarefas WHERE id=$1
+    `
+    const result=await pool.query(query,[id])
+    res.render('edit',{tarefa:result.rows})
+})
 
 
 
@@ -65,6 +72,41 @@ app.post('/add', async(req,res)=>{
             `)
     }
 })
+
+//editar
+app.post('/edit/:id',async(req,res)=>{
+    const id=req.params.id
+    const {titulo,descricao}=req.body
+
+    const query=`
+    UPDATE tarefas
+    SET 
+    titulo=$2,
+    descricao=$3
+    WHERE id=$1
+    `
+
+
+    const result=await pool.query(query,[id,titulo,descricao])
+    if(result.rows<= 0){
+        res.send(`
+            <script>
+            alert("tarefa editada!")
+            window.location.href='/'
+            </script>
+            `)
+    }
+    else{
+           res.send(`
+            <script>
+            alert("não foi possível editar tarefa.")
+            window.location.href='/'
+            </script>
+            `) 
+    }
+
+})
+
 
 app.listen(PORT,()=>{
     console.log(`rodando em http://localhost:${PORT}`)

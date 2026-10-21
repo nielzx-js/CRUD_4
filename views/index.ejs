@@ -27,7 +27,7 @@
             <td><%=tarefa.id%></td>
             <td><%=tarefa.titulo%></td>
             <td><%=tarefa.descricao%></td>
-            <td><button>Editar</button></td>
+            <td><button type="button" onclick="window.location.href='/edit/<%=tarefa.id%>'">Editar</button></td>
 
             <td>
                 <form action="/delete/<%=tarefa.id%>" method="post">
